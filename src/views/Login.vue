@@ -29,11 +29,13 @@ export default {};
 .login {
   width: 100vw;
   height: 100vh;
+  padding-top: 100px;
+  box-sizing: border-box;
 }
 .form {
   width: 90%;
   height: 180px;
-  margin: 100px auto 50px;
+  margin: 0 auto 50px;
   border: solid 1px #ccc;
   border-radius: 10px;
   padding: 5px;

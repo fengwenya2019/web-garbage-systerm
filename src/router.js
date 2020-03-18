@@ -33,11 +33,11 @@ export default new Router({
           name: 'site',
           component: () => import('./components/Site.vue'),
         },
-        // {
-        //   path: '/deleteguide',
-        //   name: 'deleteguide',
-        //   component: () => import('./components/DeleteGuide.vue'),
-        // },
+        {
+          path: '/home/user',
+          name: 'user',
+          component: () => import('./components/User.vue'),
+        },
       ]
     }
   ]
