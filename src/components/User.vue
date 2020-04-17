@@ -2,13 +2,33 @@
   <div class="index">
     <header class="header">用户信息</header>
     <div class="user-info-card">
-      <div class="user-avatar">
-        <img src="../assets/logo.jpg" alt />
+      <div class="info-item">
+        <span class="item-title">用户名：</span>
+        <span>丰文雅</span>
       </div>
-      <div class="user-info">
-        <div class="user-name">丰文雅</div>
-        <div class="user-phone">13164339130</div>
+      <div class="info-item">
+        <span class="item-title">姓名：</span>
+        <span>丰文雅</span>
       </div>
+      <div class="info-item">
+        <span class="item-title">手机：</span>
+        <span>13164339130</span>
+      </div>
+      <div class="info-item">
+        <span class="item-title">邮箱：</span>
+        <span>fengwenya123@163.com</span>
+      </div>
+      <div class="info-item">
+        <span class="item-title">密码：</span>
+        <span>123456789</span>
+      </div>
+      <div class="info-item">
+        <span class="item-title">校区：</span>
+        <span>龙子湖</span>
+      </div>
+      <router-link to="/edit">
+        <div class="edit-info">编辑信息</div>
+      </router-link>
     </div>
     <!-- 退出登录 -->
     <router-link to="/">
@@ -24,61 +44,42 @@ export default {};
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 .index {
   width: 100%;
   height: calc(100vh - 50px);
-  background-color: rgb(248, 249, 236);
+  background-color: rgb(242, 252, 251);
   font-size: 20px;
 }
 .header {
   height: 50px;
   line-height: 50px;
-  color: rgb(237, 210, 104);
+  color: rgb(25, 125, 247);
 }
 .user-info-card {
   width: 90%;
   margin: 20px auto;
-  height: 200px;
-  border: solid 1px rgb(240, 173, 114);
-  box-shadow: 2px 3px 2px rgb(238, 152, 77);
-  border-radius: 10px;
-  display: flex;
+  height: 450px;
+  font-size: 16px;
 }
-.user-avatar {
-  width: 150px;
-  height: 200px;
-}
-.user-avatar img {
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  display: block;
-  margin: 50px auto;
-}
-.user-info {
-  width: 200px;
-  height: 200px;
-  padding: 40px 0 60px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-.user-name {
-  width: 170px;
-  height: 40px;
-  line-height: 40px;
+.info-item {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
   text-align: left;
-  padding-left: 5px;
-  border-bottom: dashed 1px rgb(58, 57, 57);
+  background-color: #fff;
+  margin: 10px 0;
 }
-.user-phone {
-  width: 170px;
-  height: 40px;
-  line-height: 40px;
+.item-title {
+  color: rgb(25, 125, 247);
+}
+.edit-info {
+  color: rgb(25, 125, 247);
   text-align: left;
-  padding-left: 5px;
-  border-bottom: dashed 1px rgb(58, 57, 57);
+  padding: 10px;
 }
 .logout {
   width: 90%;
@@ -86,6 +87,8 @@ export default {};
   line-height: 45px;
   border-radius: 10px;
   margin: 10px auto;
-  background: linear-gradient(45deg, rgb(198, 125, 125), rgb(238, 229, 96));
+  background: rgb(25, 125, 247);
+  color: #fff;
+  font-size: 16px;
 }
 </style>
