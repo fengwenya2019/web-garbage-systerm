@@ -10,16 +10,12 @@
     </header>
     <div class="form">
       <van-form @submit="onSubmit">
-        <van-field v-model="username" name="用户名" label="用户名" placeholder="用户名" />
-        <van-field v-model="name" name="姓名" label="姓名" placeholder="姓名" />
-        <van-field v-model="phone" name="手机" label="手机" placeholder="手机" />
-        <van-field v-model="email" name="邮箱" label="邮箱" placeholder="邮箱" />
-        <van-field v-model="password" name="密码" label="密码" placeholder="密码" />
-        <div class="campus">校区</div>
-        <van-radio-group v-model="radio" direction="horizontal">
-          <van-radio name="1">龙子湖</van-radio>
-          <van-radio name="2">金水区</van-radio>
-        </van-radio-group>
+        <van-field v-model="editInfo.uname" name="用户名" label="用户名" placeholder="用户名" />
+        <van-field v-model="editInfo.name" name="姓名" label="姓名" placeholder="姓名" />
+        <van-field v-model="editInfo.tel" name="手机" label="手机" placeholder="手机" />
+        <van-field v-model="editInfo.email" name="邮箱" label="邮箱" placeholder="邮箱" />
+        <van-field v-model="editInfo.pwd" name="密码" label="密码" placeholder="密码" />
+        <van-field v-model="editInfo.cap" name="校区" label="校区" placeholder="校区" />
         <div style="margin: 16px;">
           <van-button round block type="info" native-type="submit">确认</van-button>
         </div>
@@ -35,16 +31,19 @@ import { Toast } from "vant";
 export default {
   data() {
     return {
-      radio: 1,
-      username: "",
-      name: "",
-      phone: "",
-      email: "",
-      password: ""
+      editInfo: {
+        uname: "",
+        name: "",
+        tel: "",
+        email: "",
+        pwd: "",
+        cap: ""
+      }
     };
   },
   methods: {
-    onSubmit() {
+    onSubmit(e) {
+      console.log(e);
       // 这发起请求
       Toast.success("编辑成功");
     }

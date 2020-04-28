@@ -85,7 +85,7 @@ export default {};
   width: 90%;
   height: 45px;
   line-height: 45px;
-  border-radius: 10px;
+  border-radius: 45px;
   margin: 10px auto;
   background: rgb(25, 125, 247);
   color: #fff;
