@@ -7,37 +7,37 @@
           <li
             class="nav-item"
             :class="{'nav-active':navActiveIndex==index}"
-            v-for="(item, index) in siteList"
+            v-for="(site, index) in siteList"
             :key="index"
-            @click="clickNav(index)"
-          >{{item.catagoryName}}</li>
+            @click="clickNav(index,site.locationinfoId)"
+          >{{site.locationinfoName}}</li>
         </ul>
       </div>
       <div class="right-box">
         <div class="site-info">
           <div class="info-box">
             <div class="info-title">投放站点</div>
-            <div class="info-content">1号宿舍楼</div>
+            <div class="info-content">{{siteInfo.locationinfoName}}</div>
           </div>
           <div class="info-box">
             <div class="info-title">具体位置</div>
-            <div>西门入口处</div>
+            <div>{{siteInfo.locationinfoName}}</div>
           </div>
           <div class="info-box">
             <div class="info-title">开放时间</div>
-            <div>每周一到周五8:00-20:00</div>
+            <div>{{siteInfo.opentime}}</div>
           </div>
           <div class="info-box">
             <div class="info-title">垃圾桶类别</div>
-            <div>可回收物，厨余垃圾</div>
+            <div>{{siteInfo.bucketcata}}</div>
           </div>
           <div class="info-box">
             <div class="info-title">垃圾桶数量</div>
-            <div>3个</div>
+            <div>{{siteInfo.bucketnum}}</div>
           </div>
           <div class="info-box">
             <div class="info-title">注意</div>
-            <div>可回收物1个，厨余垃圾2个</div>
+            <div>{{siteInfo.attention}}</div>
           </div>
         </div>
       </div>
@@ -46,53 +46,26 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+  computed:{
+    ...mapState(['siteList','siteInfo'])
+  },
+  created(){
+    const id = 1
+    this.$store.dispatch("querySiteList");
+    this.$store.dispatch("querySiteInfo",{id:id});
+  },
   data() {
     return {
-      siteList: [
-        {
-          catagoryName: "1号宿舍楼"
-        },
-        {
-          catagoryName: "23号宿舍楼"
-        },
-        {
-          catagoryName: "餐厅西楼"
-        },
-        {
-          catagoryName: "报告厅"
-        },
-        {
-          catagoryName: "6号教学楼"
-        },
-        {
-          catagoryName: "操场西门"
-        }
-      ],
       navActiveIndex: 0,
-      guideList: [
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器",
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器",
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器"
-      ],
       activeIndex: 0
     };
   },
   methods: {
-    clickNav(index) {
+    clickNav(index,id) {
       this.navActiveIndex = index;
+      this.$store.dispatch("querySiteInfo",{id:id});
     }
   }
 };
@@ -124,6 +97,7 @@ export default {
   height: 605px;
   background-color: #eee;
   border-right: solid 1px #ccc;
+  overflow: scroll;
 }
 
 .left-nav ul {

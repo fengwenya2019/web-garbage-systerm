@@ -44,6 +44,11 @@ export default new Router({
       path: '/edit',
       name: 'edit',
       component: () => import('./views/EditInfo.vue'),
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/SearchGuide.vue'),
     }
   ]
 })

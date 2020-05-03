@@ -2,16 +2,16 @@
   <div class="index">
     <header class="header">绿色日报</header>
     <div class="report-scroll">
-      <div class="report-box" v-for="(item,index) in reportList" :key="index">
-        <div class="time">2020年3月1日</div>
+      <div class="report-box" v-for="(report,index) in reportList" :key="index">
+        <div class="time">{{timeChange(report.greendailyinfoUploadtime)}}</div>
         <div class="report-content">
           <div class="title">
-            3月1日绿色日报
-            <span>日报</span>
+            {{report.greendailyinfoTitle}}
+            <span>{{report.greendailyinfoDescription}}</span>
           </div>
-          <div class="brief-info">我校今日共产生可回收垃圾12吨，有害垃圾1吨，厨余垃圾10吨,其他垃圾5吨。</div>
+          <div class="brief-info">{{report.greendailyinfoText}}</div>
           <div class="report-writer">
-            <span>发布人:</span>学校垃圾管理部门
+            <span>发布人:</span>{{report.greendailyinfoAuthor}}
           </div>
         </div>
       </div>
@@ -21,12 +21,27 @@
 
 <script>
 // @ is an alias to /src
-
+import {mapState} from 'vuex'
 export default {
+  computed:{
+    ...mapState(['reportList'])
+  },
+  created(){
+    this.$store.dispatch("queryReportInfo");
+  },
   data() {
     return {
-      reportList: [1, 2, 3, 4, 5]
     };
+  },
+  methods:{
+    // 时间转换
+    timeChange(time){
+      var now = new Date(time)
+      var year=now.getFullYear(); 
+      var month=now.getMonth()+1; 
+      var date=now.getDate(); 
+      return year+"年"+month+"月"+date+"日 " 
+    }
   }
 };
 </script>

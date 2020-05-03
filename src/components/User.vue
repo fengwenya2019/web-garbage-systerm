@@ -4,27 +4,27 @@
     <div class="user-info-card">
       <div class="info-item">
         <span class="item-title">用户名：</span>
-        <span>丰文雅</span>
+        <span>{{userInfo.userinfoUsername}}</span>
       </div>
       <div class="info-item">
         <span class="item-title">姓名：</span>
-        <span>丰文雅</span>
+        <span>{{userInfo.userinfoName}}</span>
       </div>
       <div class="info-item">
         <span class="item-title">手机：</span>
-        <span>13164339130</span>
+        <span>{{userInfo.userinfoPhone}}</span>
       </div>
       <div class="info-item">
         <span class="item-title">邮箱：</span>
-        <span>fengwenya123@163.com</span>
+        <span>{{userInfo.email}}</span>
       </div>
       <div class="info-item">
         <span class="item-title">密码：</span>
-        <span>123456789</span>
+        <span>{{userInfo.userinfoPassword}}</span>
       </div>
       <div class="info-item">
         <span class="item-title">校区：</span>
-        <span>龙子湖</span>
+        <span>{{userInfo.cap}}</span>
       </div>
       <router-link to="/edit">
         <div class="edit-info">编辑信息</div>
@@ -39,8 +39,23 @@
 
 <script>
 // @ is an alias to /src
-
-export default {};
+import {mapState} from 'vuex'
+export default {
+  computed:{
+    ...mapState(['userInfo'])
+  },
+  created(){
+    const tel = sessionStorage.getItem("tel");
+    this.$store.dispatch("queryUserInfo",{tel:tel});
+  },
+  mounted(){
+    
+  },
+  methods:{
+    
+    
+  }
+};
 </script>
 
 <style scoped>

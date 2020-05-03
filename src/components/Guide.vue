@@ -1,7 +1,9 @@
 <template>
   <div class="index">
     <header class="header">垃圾分类指南查询</header>
-    <van-search shape="round" background="rgb(255, 246, 246)" placeholder="请输入搜索关键词" />
+    <router-link to="/search">
+      <van-search shape="round" background="rgb(255, 246, 246)" placeholder="搜索垃圾查看对应分类" />
+    </router-link>
     <div class="class-guide">
       <!-- <van-tree-select height="131vw" :items="items" :main-active-index.sync="activeIndex" /> -->
       <div class="left-nav">
@@ -9,29 +11,29 @@
           <li
             class="nav-item"
             :class="{'nav-active':navActiveIndex==index}"
-            v-for="(item, index) in cataList"
+            v-for="(cata, index) in cataList"
             :key="index"
-            @click="clickNav(index)"
-          >{{item.catagoryName}}</li>
+            @click="clickNav(cata.classificationinfoId,index)"
+          >{{cata.classificationinfoName}}</li>
         </ul>
       </div>
       <div class="right-box">
         <div class="cata-info">
           <div class="cata-title">
-            <span class="bold">可回收物：</span>
-            <span>主要包括废纸、塑料、玻璃、金属和布料五大类。</span>
+            <span class="bold">{{cataInfo.classificationinfoName}}：</span>
+            <span>{{cataInfo.classificationinfoDescription}}</span>
           </div>
           <div class="delivery-require">
             <span class="bold">投放要求：</span>
-            <span>要注意纸巾和厕所纸由于水溶性太强不可回收。</span>
+            <span>{{cataInfo.catarequire}}</span>
           </div>
           <div class="delivery-require">
             <span class="bold">例如：</span>
-            <span>废纸:主要包括报纸、期刊、图书、各种包装纸等。塑料:各种塑料袋、塑料泡沫、塑料包装...</span>
+            <span>{{cataInfo.cataeg}}</span>
           </div>
         </div>
         <ul>
-          <li class="guide-item" v-for="(item,index) in guideList" :key="index">{{item}}</li>
+          <li class="guide-item" v-for="(guide,index) in guideList" :key="index">{{guide.classificationguideinfoName}}</li>
         </ul>
       </div>
     </div>
@@ -39,51 +41,27 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+  computed:{
+    ...mapState(['cataList','cataInfo',"guideList"])
+  },
+  created(){
+    const id = 1
+    this.$store.dispatch("queryCataList");
+    this.$store.dispatch("queryCataInfo",{id:id});
+  },
   data() {
     return {
-      cataList: [
-        {
-          catagoryName: "可回收物",
-          detail: "xxxxxxxxx"
-        },
-        {
-          catagoryName: "有害垃圾",
-          detail: "xxxxxxxxx"
-        },
-        {
-          catagoryName: "厨余垃圾",
-          detail: "xxxxxxxxx"
-        },
-        {
-          catagoryName: "其他垃圾",
-          detail: "xxxxxxxxx"
-        }
-      ],
       navActiveIndex: 0,
-      guideList: [
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器",
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器",
-        "塑料",
-        "旧衣物",
-        "本子",
-        "书籍",
-        "废旧电器"
-      ],
       activeIndex: 0
     };
   },
   methods: {
-    clickNav(index) {
+    clickNav(id,index) {
       this.navActiveIndex = index;
+      this.$store.dispatch("queryCataInfo",{id,id});
+      this.$store.dispatch("queryGuideList",{id:id});
     }
   }
 };
