@@ -89,7 +89,7 @@ export default {
     queryGuideList(store,obj) {
         const base = "/laji"
         axios.post(base + "/laji/cg/getcBycgCode",{
-            "code":obj.id
+            "code":obj.code
         }).then((res) => {
             if(res.data.code === 100){
                 store.commit("setGuideList", res.data.extend.classificationguides)

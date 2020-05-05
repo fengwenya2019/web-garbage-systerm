@@ -13,7 +13,7 @@
             :class="{'nav-active':navActiveIndex==index}"
             v-for="(cata, index) in cataList"
             :key="index"
-            @click="clickNav(cata.classificationinfoId,index)"
+            @click="clickNav(cata.classificationinfoId,cata.classificationinfoName,index)"
           >{{cata.classificationinfoName}}</li>
         </ul>
       </div>
@@ -49,7 +49,10 @@ export default {
   created(){
     const id = 1
     this.$store.dispatch("queryCataList");
-    this.$store.dispatch("queryCataInfo",{id:id});
+    this.$store.dispatch("queryCataInfo",{id:41});
+    // this.$store.dispatch("queryGuideList",{code:'可回收物'});
+  },
+  mounted(){
   },
   data() {
     return {
@@ -58,10 +61,10 @@ export default {
     };
   },
   methods: {
-    clickNav(id,index) {
+    clickNav(id,code,index) {
       this.navActiveIndex = index;
       this.$store.dispatch("queryCataInfo",{id,id});
-      this.$store.dispatch("queryGuideList",{id:id});
+      this.$store.dispatch("queryGuideList",{code:code});
     }
   }
 };

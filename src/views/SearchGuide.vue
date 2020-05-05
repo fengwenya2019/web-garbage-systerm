@@ -18,7 +18,7 @@
             style="border:solid 1px #ccc"
         >
             <template #button>
-                <van-button size="small" type="primary" @click="getCode()">搜索</van-button>
+                <van-button size="small" type="primary" @click="searchGuide()">搜索</van-button>
             </template>
         </van-field>
     </div>
@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    getCode(){
+    searchGuide(){
         // 发起搜索请求
         this.$store.dispatch("searchGuideList",{word:this.searchWord});
     },
